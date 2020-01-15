@@ -1,0 +1,7 @@
+# Binaries
+play
+*.o
+
+# SDL Directories
+lib/
+include/
