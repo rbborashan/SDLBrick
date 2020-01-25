@@ -59,6 +59,8 @@ int main()
 
         while (!quit)
         {
+            b.renderBoard(renderer);
+            /*
             int ticks = (SDL_GetTicks() / 100) % 4 + 1;
 
             if (ticks == 4 && !drawn_rect)
@@ -89,6 +91,7 @@ int main()
 
             cout << "ticks= " << ticks << endl;
             cout << "x= " << srcrect.x << "\ny= " << srcrect.y << endl;
+            */
 
             while (SDL_PollEvent(&pEvent))
             {

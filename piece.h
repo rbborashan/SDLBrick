@@ -31,6 +31,8 @@ public:
     int getHeight();
     int getXOffset();
     int getYOffset();
+    
+    Color getColor();
 };
 
 #endif // PIECE_H
