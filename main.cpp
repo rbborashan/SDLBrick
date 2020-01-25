@@ -49,49 +49,12 @@ int main()
         SDL_SetRenderDrawColor(renderer, COL_BK_GREY);
         SDL_RenderClear(renderer);
 
-        SDL_Rect srcrect = {50, 50, 50, 50};
-
         //Update the surface
         //SDL_UpdateWindowSurface(window);
-
-        int i = 0;
-        bool drawn_rect = false;
 
         while (!quit)
         {
             b.renderBoard(renderer);
-            /*
-            int ticks = (SDL_GetTicks() / 100) % 4 + 1;
-
-            if (ticks == 4 && !drawn_rect)
-            {
-                cout << "draw rect\n";
-                srcrect.x += 20;
-                srcrect.y += 20;
-
-                SDL_SetRenderDrawColor(renderer, COL_BK_GREY);
-                SDL_RenderClear(renderer);
-
-                if (srcrect.x < SCREEN_HEIGHT && srcrect.y < SCREEN_WIDTH)
-                {
-                    SDL_SetRenderDrawColor(renderer, COL_WHITE);
-                    SDL_RenderDrawRect(renderer, &srcrect);
-                }
-
-                drawn_rect = true;
-            }
-            else if (ticks != 4 && drawn_rect)
-            {
-                drawn_rect = false;
-            }
-            else
-            {
-                // nothing
-            }
-
-            cout << "ticks= " << ticks << endl;
-            cout << "x= " << srcrect.x << "\ny= " << srcrect.y << endl;
-            */
 
             while (SDL_PollEvent(&pEvent))
             {

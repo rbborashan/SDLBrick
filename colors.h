@@ -10,5 +10,7 @@ struct Color {
 
 #define COL_BK_GREY 32, 33, 36, 255
 #define COL_WHITE 255, 255, 255, 255
+#define COL_RED 255, 0, 0, 255
+
 
 #endif // COLORS_H
