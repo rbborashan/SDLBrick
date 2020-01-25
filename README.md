@@ -1,4 +1,4 @@
-## SDLBrick
+## SDLBrick (***WIP***)
 ### Brick/Paddle Game created using Simple DirectMedia Layer
 
 #### Dependencies
