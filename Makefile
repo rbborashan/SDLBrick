@@ -6,6 +6,7 @@ SDL_INCLUDES = ./include
 SDL_LIBS = ./lib
 SDL_VERSION = SDL2-2.0.0
 
+CXXFLAGS += -Wall
 CPPFLAGS += -I $(SDL_INCLUDES) -L $(SDL_LIBS) -l $(SDL_VERSION)
 
 OBJECTS = main.o \
@@ -16,7 +17,7 @@ OBJECTS = main.o \
 all: play
 
 play: $(OBJECTS)
-	$(CXX) $(CPPFLAGS) $^ -o $@
+	$(CXX) $(CXXFLAGS) $(CPPFLAGS) $^ -o $@
 
 run: play
 	./$(APP)
@@ -25,13 +26,13 @@ clean:
 	rm $(APP) *.o
 
 main.o: main.cpp
-	$(CXX) $(CPPFLAGS) -c main.cpp
+	$(CXX) $(CXXFLAGS) $(CPPFLAGS) -c main.cpp
 
 board.o: board.cpp
-	$(CXX) $(CPPFLAGS) -c board.cpp
+	$(CXX) $(CXXFLAGS) $(CPPFLAGS) -c board.cpp
 
 piece.o: piece.cpp
-	$(CXX) $(CPPFLAGS) -c piece.cpp
+	$(CXX) $(CXXFLAGS) $(CPPFLAGS) -c piece.cpp
 
 view.o: view.cpp
-	$(CXX) $(CPPFLAGS) -c view.cpp
+	$(CXX) $(CXXFLAGS) $(CPPFLAGS) -c view.cpp
