@@ -98,12 +98,6 @@ int Piece::getYOffset()
 
 Color Piece::getColor()
 {
-    Color c;
-    c.red = r;
-    c.green = g;
-    c.blue = b;
-    c.alpha = a;
-
-    return c;
+    return {r,g,b,a};
 }
 //------------------------------------------------------------------------------

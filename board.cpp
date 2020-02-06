@@ -2,6 +2,7 @@
 #include "board.h"
 #include "colors.h"
 
+//------------------------------------------------------------------------------
 Board::Board()
 {
     w_width = 1200;
@@ -10,6 +11,9 @@ Board::Board()
 
 Board::Board(int _w_width, int _w_height, Layout layout)
 {
+    Piece* piece = NULL;
+    int index = 0;
+
     w_width = _w_width;
     w_height = _w_height;
     pieces = new Piece[layout.rows * layout.columns];
@@ -18,9 +22,16 @@ Board::Board(int _w_width, int _w_height, Layout layout)
     {
         for (int col = 0; col < COLUMNS; col++)
         {
-            pieces[row * ROWS + col].setXY(col * 70, row * 60);
-            pieces[row * ROWS + col].setSize(60, 20);
-            pieces[row * ROWS + col].setRGBA(COL_WHITE);
+            // Just calculate once
+            piece = &pieces[index++];
+
+            piece->setXY(col * 70, row * 60);
+
+            piece->setSize(60, 20);
+            piece->setRGBA(COL_WHITE);
+
+            printf("Constructor: piece #%i x = %i y = %i\n", index, piece->getX(),
+                                                       piece->getY());
         }
     }
 }
@@ -31,6 +42,7 @@ Board::~Board()
     pieces = NULL;
 }
 
+//------------------------------------------------------------------------------
 void Board::getWindowSize(int* width, int* height)
 {
     *width = w_width;
@@ -39,43 +51,39 @@ void Board::getWindowSize(int* width, int* height)
 
 void Board::renderBoard(SDL_Renderer* renderer)
 {
-    int x = 10;
-    int y = 10;
     Color c;
     SDL_Rect srcrect;
+    Piece* piece = NULL;
+    int index = 0;
 
     static bool rendered = false;
 
-    // Only draw once
-    if (rendered)
+    if (!rendered) // draw only once
     {
-        return;
-    }
-
-    for (int row = 0; row < ROWS; row++)
-    {
-        for (int col = 0; col < COLUMNS; col++)
+        for (int row = 0; row < ROWS; row++)
         {
-            // Add gap between pieces
-            x += (pieces[row * ROWS + col].getXOffset() + 20);
+            for (int col = 0; col < COLUMNS; col++)
+            {
+                // Just calculate the index once
+                piece = &pieces[index++];
 
-            // Get color + coordinates
-            c = pieces[row * ROWS + col].getColor();
-            srcrect.x = pieces[row * ROWS + col].getX();
-            srcrect.y = pieces[row * ROWS + col].getY();
-            srcrect.w = pieces[row * ROWS + col].getWidth();
-            srcrect.h = pieces[row * ROWS + col].getHeight();
+                // Get color + coordinates
+                c = piece->getColor();
+                srcrect.x = piece->getX();
+                srcrect.y = piece->getY();
+                srcrect.w = piece->getWidth();
+                srcrect.h = piece->getHeight();
 
-            printf("RECT x = %i, y = %i\n", srcrect.x, srcrect.y);
+                printf("Row = %i, Col = %i\n", row, col);
+                printf("Piece #%i RECT x = %i, y = %i\n", index, srcrect.x, srcrect.y);
 
-            // Render piece
-            SDL_SetRenderDrawColor(renderer, c.red, c.green, c.blue, c.alpha);
-            SDL_RenderDrawRect(renderer, &srcrect);
+                // Render piece
+                SDL_SetRenderDrawColor(renderer, c.red, c.green, c.blue, c.alpha);
+                SDL_RenderFillRect(renderer, &srcrect);
+            }
         }
-
-        // Add gap between pieces
-        y += (pieces[row * ROWS].getYOffset() + 20);
+        rendered = true;
     }
-
-    rendered = true;
 }
+
+//------------------------------------------------------------------------------
