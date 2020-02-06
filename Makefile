@@ -25,14 +25,14 @@ run: play
 clean:
 	rm $(APP) *.o
 
-main.o: main.cpp
+main.o: main.cpp ./*.cpp ./*.h
 	$(CXX) $(CXXFLAGS) $(CPPFLAGS) -c main.cpp
 
-board.o: board.cpp
+board.o: board.cpp board.h colors.h
 	$(CXX) $(CXXFLAGS) $(CPPFLAGS) -c board.cpp
 
-piece.o: piece.cpp
+piece.o: piece.cpp piece.h
 	$(CXX) $(CXXFLAGS) $(CPPFLAGS) -c piece.cpp
 
-view.o: view.cpp
+view.o: view.cpp view.h
 	$(CXX) $(CXXFLAGS) $(CPPFLAGS) -c view.cpp
