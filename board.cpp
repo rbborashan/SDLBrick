@@ -22,16 +22,11 @@ Board::Board(int _w_width, int _w_height, Layout layout)
     {
         for (int col = 0; col < COLUMNS; col++)
         {
-            // Just calculate once
             piece = &pieces[index++];
 
             piece->setXY(col * 70, row * 60);
-
             piece->setSize(60, 20);
             piece->setRGBA(COL_WHITE);
-
-            printf("Constructor: piece #%i x = %i y = %i\n", index, piece->getX(),
-                                                       piece->getY());
         }
     }
 }
@@ -64,7 +59,6 @@ void Board::renderBoard(SDL_Renderer* renderer)
         {
             for (int col = 0; col < COLUMNS; col++)
             {
-                // Just calculate the index once
                 piece = &pieces[index++];
 
                 // Get color + coordinates
@@ -73,9 +67,6 @@ void Board::renderBoard(SDL_Renderer* renderer)
                 srcrect.y = piece->getY();
                 srcrect.w = piece->getWidth();
                 srcrect.h = piece->getHeight();
-
-                printf("Row = %i, Col = %i\n", row, col);
-                printf("Piece #%i RECT x = %i, y = %i\n", index, srcrect.x, srcrect.y);
 
                 // Render piece
                 SDL_SetRenderDrawColor(renderer, c.red, c.green, c.blue, c.alpha);
